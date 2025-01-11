@@ -5652,4 +5652,49 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 		rating: 3,
 		num: -4,
 	},
+	northwind: {
+		onStart(source) {
+			// duration handled in data/moves.js:tailind
+			const veil = source.side.sideConditions["auroraveil"];
+			if (!veil) {
+				this.add("-activate", source, "ability: North Wind");
+				source.side.addSideCondition(
+					"auroraveil",
+					source,
+					this.dex.abilities.get("northwind")
+				);
+			}
+		},
+		name: "North Wind",
+		rating: 5,
+		num: 998,
+		gen: 8,
+	},
+	sleetstormsaio: {
+		onPreStart(pokemon) {
+			this.add('-ability', pokemon, 'Sleet Storm');
+			this.add('-ability', pokemon, 'North Wind');
+			this.add('-ability', pokemon, 'Snow Warning');
+			this.add('-ability', pokemon, 'Slush Rush');
+			this.add('-ability', pokemon, 'Ice Scales');
+		},
+/*		onStart(source) {
+			this.field.setWeather('snow');
+
+			const veil = source.side.sideConditions["auroraveil"];
+			if (!veil) {
+				this.add("-activate", source, "ability: North Wind");
+				source.side.addSideCondition(
+					"auroraveil",
+					source,
+					this.dex.abilities.get("northwind")
+				);
+			}
+		},
+*/
+		flags: {failroleplay: 1, noreceiver: 1, noentrain: 1, notrace: 1, failskillswap: 1, cantsuppress: 1},
+		name: "Sleet Storm",
+		rating: 4.5,
+		num: 999,
+	},
 };
